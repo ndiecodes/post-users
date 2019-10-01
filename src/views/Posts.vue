@@ -14,7 +14,7 @@
         :key="post.id"
         class="border m-6 rounded-lg  bg-white mx-auto max-w-xl shadow-lg rounded-lg overflow-hidden"
       >
-        <div class="text-center sm:text-left sm:flex-grow px-6 py-4">
+        <div class="text-left p-3">
           <div class="mb-4">
             <p class="text-xl font-bold leading-tight ">
               {{ post.title | capitalize }}
@@ -24,7 +24,7 @@
               {{ post.body | capitalize }}
             </p>
           </div>
-          <div class="ext-center md:text-left lg:text-left">
+          <div class="text-center md:text-left lg:text-left">
             <router-link :to="{ name: 'post', params: { postId: post.id } }"
               ><button
                 class="text-xs font-semibold rounded px-6 py-1 leading-normal bg-white border border-purple text-purple hover:bg-indigo-600 hover:text-white"

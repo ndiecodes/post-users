@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-xl mx-auto">
+  <div class="container max-w-xl mx-auto px-2">
       <div id="nav">
         <router-link :to="{ name: 'home'}">
             <h3 class="text-xl text-indigo-600 font-extrabold text-center logo-text p-5">
@@ -7,7 +7,7 @@
         </h3> </router-link>
     </div>
 
-    <div class="px-1 pb-10 pt-2">
+    <div class="pb-10 pt-2">
       <div class="mb-4">
         <p class="text-xl font-bold leading-tight text-left ">
            {{ post.title | capitalize }}
