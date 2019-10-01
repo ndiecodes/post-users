@@ -1,8 +1,8 @@
 <template>
   <div>
     <div id="nav">
-      <h1 class="text-2xl text-indigo-600 font-extrabold logo-text p-5">
-        Users and Posts
+      <h1 class="text-2xl text-indigo-600 font-extrabold text-center logo-text p-5">
+        Jsonplaceholder Exercise
       </h1>
     </div>
 

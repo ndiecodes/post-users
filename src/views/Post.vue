@@ -1,42 +1,28 @@
 <template>
-  <div>
-    <div id="nav">
-      <h1 class="text-2xl text-indigo-600 font-extrabold logo-text p-5"></h1>
+  <div class="container max-w-xl mx-auto">
+      <div id="nav">
+        <router-link :to="{ name: 'home'}">
+            <h3 class="text-xl text-indigo-600 font-extrabold text-center logo-text p-5">
+            Home
+        </h3> </router-link>
     </div>
 
-    <div class="container max-w-xl mx-auto px-1 pb-10">
+    <div class="px-1 pb-10 pt-2">
       <div class="mb-4">
         <p class="text-xl font-bold leading-tight text-left ">
-          sunt aut facere repellat provident occaecati excepturi optio
-          reprehenderit
+           {{ post.title | capitalize }}
         </p>
 
         <p class="text-sm text-left leading-tight text-grey-dark pt-2 pb-2">
-          quia et suscipit\nsuscipit recusandae consequuntur expedita et
-          cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem
-          sunt rem eveniet architecto
+         {{ post.body | capitalize }}
         </p>
-        <hr class="mt-5 mb-2" />
+
+        <p class="mt-2"><b>Posted By: </b> {{user.name}}</p>
+        <hr class="mt-1 mb-2" />
       </div>
 
       <Comments :postId="1" />
 
-      <div>
-        <div class="flex items-center">
-          <img
-            class="block h-5 rounded-full mr-4"
-            src="https://api.adorable.io/avatars/196/abott@adorable.png"
-            alt=""
-          />
-
-          <p class="text-sm font-bold leading-tight ">Eliseo@gardner.biz</p>
-        </div>
-        <p class="text-left py-2">
-          laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora
-          quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente
-          accusantium
-        </p>
-      </div>
     </div>
   </div>
 </template>
@@ -51,27 +37,45 @@ export default {
   },
   data: function() {
     return {
-      posts: []
+      post: {},
+      user: {}
     };
   },
   mounted: function() {
-    // this.loadComments()
+    this.loadPost()
   },
 
   methods: {
-    loadComments: function() {
+    loadPost: function() {
+    let self = this;
       axios
         .get(
-          `https://jsonplaceholder.typicode.com/users/${this.$route.params.userId}/posts/`
+          `https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId}`
         )
         .then(response => {
-          this.posts = response.data;
+          this.post = response.data;
+          self.loadUser();
         })
         .catch(err => {
           console.log(err);
         });
-    }
+    },
+
+    loadUser: function() {
+      axios
+        .get(
+          `https://jsonplaceholder.typicode.com/users/${this.post.userId}`
+        )
+        .then(response => {
+          this.user = response.data;
+          console.log(this.user)
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
   },
+
 
   filters: {
     capitalize: function(value) {

@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="container max-w-xl mx-auto px-1 pb-10">
     <div id="nav">
-      <h1 class="text-2xl text-indigo-600 font-extrabold logo-text p-5">
-        Posts
-      </h1>
+        <router-link :to="{ name: 'home'}">
+            <h3 class="text-xl text-indigo-600 font-extrabold text-center logo-text pt-5 pb-3">
+            Home
+        </h3> </router-link>
     </div>
 
-    <div class="container mx-auto px-1 pb-10">
+    <div class="">
+      <h3 class="text-center font-bold"> All Posts By {{user.name}}</h3> 
       <div
         v-for="post in posts"
         :key="post.id"
@@ -43,21 +45,35 @@ export default {
   name: "posts",
   data: function() {
     return {
+      user: {},
       posts: []
     };
   },
   mounted: function() {
     this.loadUserPosts();
+    this.loadUser();
   },
 
   methods: {
-    loadUserPosts: function() {
+    loadUser: function() {
       axios
         .get(
           `https://jsonplaceholder.typicode.com/users/${this.$route.params.userId}/posts/`
         )
         .then(response => {
           this.posts = response.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    loadUserPosts: function() {
+      axios
+        .get(
+          `https://jsonplaceholder.typicode.com/users/${this.$route.params.userId}`
+        )
+        .then(response => {
+          this.user = response.data;
         })
         .catch(err => {
           console.log(err);
