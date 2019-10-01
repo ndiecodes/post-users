@@ -21,6 +21,12 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/Posts.vue")
+    },
+    {
+      path: "/posts/:postId",
+      name: "post",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Post.vue")
     }
   ]
 });
